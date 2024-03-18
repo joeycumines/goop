@@ -41,7 +41,7 @@ func ParseMakeLibArguments(mlfIn MakeLibFlags) (MakeLibFlags, error) {
 	argIndex := 1 // Skip entry 0
 	for argIndex < len(os.Args) {
 		// Share parsing data
-		fmt.Println("- Parsed input: %v", os.Args[argIndex])
+		fmt.Printf("- Parsed input: %v\n", os.Args[argIndex])
 
 		// Parse Inputs
 		switch {
@@ -202,7 +202,7 @@ func WriteLibGo(mlfIn MakeLibFlags) error {
 	defer f.Close()
 
 	// Write all directives to file
-	_, err = f.WriteString(fmt.Sprintf("%v%v%v import \"C\"\n", packageDirective, cxxDirective, ldflagsDirective))
+	_, err = f.WriteString(fmt.Sprintf("%v%v%vimport \"C\"\n", packageDirective, cxxDirective, ldflagsDirective))
 	if err != nil {
 		return err
 	}
