@@ -32,13 +32,14 @@ func ExampleModel_simple() {
 	obj := goop.Sum(x, y, z.Mult(2))
 	m.SetObjective(obj, goop.SenseMaximize)
 
-	// Optimize the variables according to the model
-	sol, err := m.Optimize(solvers.NewLPSolveSolver())
+	// construct and ALWAYS delete solvers.Solver instance
+	solver := solvers.NewLPSolveSolver()
+	defer solvers.DeleteSolver(solver)
 
-	// Check if there is an error from the solver. No error should be returned
-	// for this model
+	// optimise the variables according to the model
+	sol, err := m.Optimize(solver)
 	if err != nil {
-		panic("Should not have an error")
+		panic(err)
 	}
 
 	// Print out the solution

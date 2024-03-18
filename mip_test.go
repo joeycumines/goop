@@ -1,7 +1,6 @@
 package goop_test
 
 import (
-	"fmt"
 	"github.com/joeycumines/goop"
 	"github.com/joeycumines/goop/solvers"
 	"testing"
@@ -51,7 +50,7 @@ func solveSumRowsColsModel(t *testing.T, solver solvers.Solver) {
 		t.Fatal(err)
 	}
 
-	fmt.Println(prettyPrintVarMatrix(vs, sol))
+	t.Logf("output:\n%s", prettyPrintVarMatrix(vs, sol))
 }
 
 func prettyPrintVarMatrix(vs [][]*goop.Var, sol *goop.Solution) string {

@@ -101,8 +101,10 @@ func (m *Model) SetObjective(e Expr, sense ObjSense) {
 	m.obj = NewObjective(e, sense)
 }
 
-// Optimize optimizes the model using the given solver type and returns the
+// Optimize optimizes the model using the given solver instance and returns the
 // solution or an error.
+// WARNING: Remember to delete the solver, after it is no longer needed, using
+// the solvers.DeleteSolver function.
 func (m *Model) Optimize(solver solvers.Solver) (*Solution, error) {
 	if len(m.vars) == 0 {
 		return nil, errors.New("no variables in model")
