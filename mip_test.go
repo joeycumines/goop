@@ -2,9 +2,9 @@ package goop_test
 
 import (
 	"fmt"
-	"testing"
-
+	"github.com/joeycumines/goop"
 	"github.com/joeycumines/goop/solvers"
+	"testing"
 )
 
 func solveSimpleMIPModel(t *testing.T, solver solvers.Solver) {

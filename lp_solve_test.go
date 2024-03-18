@@ -1,9 +1,8 @@
 package goop_test
 
 import (
-	"testing"
-
 	"github.com/joeycumines/goop/solvers"
+	"testing"
 )
 
 func TestLPSolve(t *testing.T) {

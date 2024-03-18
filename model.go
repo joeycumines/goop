@@ -4,10 +4,9 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"time"
-
 	"github.com/joeycumines/goop/solvers"
 	"github.com/sirupsen/logrus"
+	"time"
 )
 
 // Model represents the overall constrained linear optimization model to be
@@ -155,7 +154,6 @@ func (m *Model) Optimize(solver solvers.Solver) (*Solution, error) {
 	}
 
 	mipSol := solver.Optimize()
-	defer solvers.DeleteSolver(solver)
 
 	if mipSol.GetErrorCode() != 0 {
 		msg := fmt.Sprintf(

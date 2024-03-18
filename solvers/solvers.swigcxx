@@ -3,7 +3,6 @@
 /* Includes the header in the wrapper code */
 #include "base_solver.hpp"
 #include "solution.hpp"
-#include "gurobi.hpp"
 #include "lpsolve.hpp"
 %}
 
@@ -11,5 +10,4 @@
 
 %include "base_solver.hpp"
 %include "solution.hpp"
-%include "gurobi.hpp"
 %include "lpsolve.hpp"

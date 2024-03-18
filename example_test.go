@@ -3,6 +3,7 @@ package goop_test
 import (
 	"fmt"
 
+	"github.com/joeycumines/goop"
 	"github.com/joeycumines/goop/solvers"
 )
 

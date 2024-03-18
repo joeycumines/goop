@@ -1,6 +1,7 @@
 package goop_test
 
 import (
+	"github.com/joeycumines/goop"
 	"testing"
 )
 

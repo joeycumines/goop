@@ -24,6 +24,7 @@ public:
 private:
     lprec *lp;
     int numVars;
+    int logLevel;
 };
 
 #endif

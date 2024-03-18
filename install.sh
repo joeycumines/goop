@@ -7,14 +7,9 @@ WORK=$(pwd)
 if [[ $(uname) == 'Linux' ]]; then
     sudo apt install -y libpcre3 libpcre3-dev autotools-dev byacc \
         flex cmake build-essential autoconf
-    # Original Method for Installation
     scripts/install_swig.sh
     scripts/install_lpsolve.sh
-
     mkdir -p .third_party
-
-    ln -sf $GUROBI_HOME $WORK/.third_party/gurobi
-
 elif [[ $(uname) == 'Darwin' ]]; then
     brew install pcre autoconf
     brew install swig 
