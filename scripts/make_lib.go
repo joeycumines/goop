@@ -78,6 +78,7 @@ func GetDefaultMakeLibFlags() (MakeLibFlags, error) {
 /*
 StringToGurobiVersionInfo
 Assumptions:
+
 	Assumes that a valid gurobi name is given.
 */
 func StringToGurobiVersionInfo(gurobiDirectoryName string) (GurobiVersionInfo, error) {
@@ -113,9 +114,12 @@ func StringToGurobiVersionInfo(gurobiDirectoryName string) (GurobiVersionInfo, e
 /*
 StringsToGurobiVersionInfoList
 Description:
+
 	Receives a set of strings which should be in the format of valid gurobi installation directories
 	and returns a list of GurobiVersionInfo objects.
+
 Assumptions:
+
 	Assumes that a valid gurobi name is given.
 */
 func StringsToGurobiVersionInfoList(gurobiDirectoryNames []string) ([]GurobiVersionInfo, error) {
@@ -209,6 +213,7 @@ func ParseMakeLibArguments(mlfIn MakeLibFlags) (MakeLibFlags, error) {
 /*
 CreateCXXFlagsDirective
 Description:
+
 	Creates the CXX Flags directive in the  file that we will use in lib.go.
 */
 func CreateCXXFlagsDirective(mlfIn MakeLibFlags) (string, error) {
@@ -219,7 +224,7 @@ func CreateCXXFlagsDirective(mlfIn MakeLibFlags) (string, error) {
 	}
 
 	gurobiCXXFlagsString := fmt.Sprintf("// #cgo CXXFLAGS: --std=c++11 -I%v/include -I%v/include\n", mlfIn.GurobiHome, pwd)
-	lpSolveCXXFlagsString := "// #cgo CXXFLAGS: -I/usr/local/opt/lp_solve/include\n" // Works as long as lp_solve was installed with Homebrew
+	lpSolveCXXFlagsString := "// #cgo CXXFLAGS: -I/opt/homebrew/opt/lp_solve/include\n" // Works as long as lp_solve was installed with Homebrew
 
 	return fmt.Sprintf("%v%v", gurobiCXXFlagsString, lpSolveCXXFlagsString), nil
 }
@@ -227,6 +232,7 @@ func CreateCXXFlagsDirective(mlfIn MakeLibFlags) (string, error) {
 /*
 CreatePackageLine
 Description:
+
 	Creates the "package" directive in the  file that we will use in lib.go.
 */
 func CreatePackageLine(mlfIn MakeLibFlags) (string, error) {
@@ -237,6 +243,7 @@ func CreatePackageLine(mlfIn MakeLibFlags) (string, error) {
 /*
 CreateLDFlagsDirective
 Description:
+
 	Creates the LD_FLAGS directive in the file that we will use in lib.go.
 */
 func CreateLDFlagsDirective(mlfIn MakeLibFlags) (string, error) {
@@ -266,7 +273,7 @@ func CreateLDFlagsDirective(mlfIn MakeLibFlags) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	ldFlagsDirective = fmt.Sprintf("%v// #cgo LDFLAGS: -L/usr/local/opt/lp_solve/lib -llpsolve%v%v\n", ldFlagsDirective, lvi.MajorVersion, lvi.MinorVersion)
+	ldFlagsDirective = fmt.Sprintf("%v// #cgo LDFLAGS: -L/opt/homebrew/opt/lp_solve/lib -llpsolve%v%v\n", ldFlagsDirective, lvi.MajorVersion, lvi.MinorVersion)
 
 	return ldFlagsDirective, nil
 }
@@ -283,6 +290,7 @@ func (mlf *MakeLibFlags) ToGurobiVersionInfo() (GurobiVersionInfo, error) {
 /*
 HeaderNameToLPSolveVersionInfo
 Description:
+
 	Converts the header file (like liblpsolve55.a) into an LPSolveVersionInfo object which can be used later.
 */
 func HeaderNameToLPSolveVersionInfo(lpsolveHeaderName string) (LPSolveVersionInfo, error) {
@@ -332,7 +340,7 @@ func GetAHeaderFilenameFrom(dirName string) (string, error) {
 
 func DetectLPSolveVersion() (LPSolveVersionInfo, error) {
 	// Constants
-	homebrewLPSolveDirectory := "/usr/local/opt/lp_solve"
+	homebrewLPSolveDirectory := "/opt/homebrew/opt/lp_solve"
 
 	// Algorithm
 	headerFilename, err := GetAHeaderFilenameFrom(fmt.Sprintf("%v/lib/", homebrewLPSolveDirectory))
