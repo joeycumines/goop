@@ -15,5 +15,5 @@ elif [[ $(uname) == 'Darwin' ]]; then
     brew install swig 
     brew install lp_solve 
 
-    go run scripts/make_lib.go --go-fname solvers/lib.go --pkg solvers
+    go run scripts/make_lib.go --go-fname internal/solvers/lib.go --pkg solvers
 fi

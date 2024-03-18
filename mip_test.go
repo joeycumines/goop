@@ -2,11 +2,10 @@ package goop_test
 
 import (
 	"github.com/joeycumines/goop"
-	"github.com/joeycumines/goop/solvers"
 	"testing"
 )
 
-func solveSimpleMIPModel(t *testing.T, solver solvers.Solver) {
+func solveSimpleMIPModel(t *testing.T) {
 	m := goop.NewModel()
 	m.ShowLog(false)
 	x := m.AddBinaryVar()
@@ -18,7 +17,7 @@ func solveSimpleMIPModel(t *testing.T, solver solvers.Solver) {
 
 	obj := goop.Sum(x, y, z.Mult(2))
 	m.SetObjective(obj, goop.SenseMaximize)
-	sol, err := m.Optimize(solver)
+	sol, err := m.Optimize()
 
 	if err != nil {
 		t.Fatal(err)
@@ -29,7 +28,7 @@ func solveSimpleMIPModel(t *testing.T, solver solvers.Solver) {
 	t.Log("z =", sol.Value(z))
 }
 
-func solveSumRowsColsModel(t *testing.T, solver solvers.Solver) {
+func solveSumRowsColsModel(t *testing.T) {
 	m := goop.NewModel()
 	m.ShowLog(false)
 	rows := 4
@@ -44,7 +43,7 @@ func solveSumRowsColsModel(t *testing.T, solver solvers.Solver) {
 		m.AddConstr(goop.SumRow(vs, i).Eq(goop.One))
 	}
 
-	sol, err := m.Optimize(solver)
+	sol, err := m.Optimize()
 
 	if err != nil {
 		t.Fatal(err)

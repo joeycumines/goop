@@ -195,7 +195,7 @@ func WriteLibGo(mlfIn MakeLibFlags) error {
 	}
 
 	// Now Write to File
-	f, err := os.Create("solvers/lib.go")
+	f, err := os.Create(mlfIn.GoFilename)
 	if err != nil {
 		return err
 	}
@@ -212,16 +212,21 @@ func WriteLibGo(mlfIn MakeLibFlags) error {
 }
 func main() {
 	mlf, err := GetDefaultMakeLibFlags()
+	if err != nil {
+		panic(err)
+	}
 
 	// Next, parse the arguments to make_lib and assign values to the mlf appropriately
 	mlf, err = ParseMakeLibArguments(mlf)
+	if err != nil {
+		panic(err)
+	}
 
-	fmt.Println(mlf)
-	fmt.Println(err)
+	fmt.Printf("%+v\n", mlf)
 
 	// Write File
 	err = WriteLibGo(mlf)
 	if err != nil {
-		fmt.Println(err)
+		panic(err)
 	}
 }

@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"github.com/joeycumines/goop"
-	"github.com/joeycumines/goop/solvers"
 )
 
 // This example shows how goop can be used to solve a simple MIP:
@@ -32,12 +31,8 @@ func ExampleModel_simple() {
 	obj := goop.Sum(x, y, z.Mult(2))
 	m.SetObjective(obj, goop.SenseMaximize)
 
-	// construct and ALWAYS delete solvers.Solver instance
-	solver := solvers.NewLPSolveSolver()
-	defer solvers.DeleteSolver(solver)
-
 	// optimise the variables according to the model
-	sol, err := m.Optimize(solver)
+	sol, err := m.Optimize()
 	if err != nil {
 		panic(err)
 	}

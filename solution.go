@@ -1,7 +1,7 @@
 package goop
 
 import (
-	"github.com/joeycumines/goop/solvers"
+	"github.com/joeycumines/goop/internal/solvers"
 )
 
 const (
