@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/mit-drl/goop/solvers"
+	"github.com/joeycumines/goop/solvers"
 	"github.com/sirupsen/logrus"
 )
 

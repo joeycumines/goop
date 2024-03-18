@@ -5,7 +5,7 @@ package gurobi
 // #cgo LDFLAGS: -L${SRCDIR}/../../.third_party/gurobi/lib -lgurobi_g++5.2 -lgurobi75
 import "C"
 import (
-	"github.com/mit-drl/goop/solvers"
+	"github.com/joeycumines/goop/solvers"
 )
 
 var (

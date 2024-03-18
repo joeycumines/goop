@@ -1,7 +1,7 @@
 package goop
 
 import (
-	"github.com/mit-drl/goop/solvers"
+	"github.com/joeycumines/goop/solvers"
 )
 
 const (

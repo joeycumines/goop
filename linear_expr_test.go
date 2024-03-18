@@ -2,8 +2,6 @@ package goop_test
 
 import (
 	"testing"
-
-	"github.com/mit-drl/goop"
 )
 
 func TestLinearExprCoeffsAndConstant(t *testing.T) {

@@ -22,6 +22,3 @@ elif [[ $(uname) == 'Darwin' ]]; then
 
     go run scripts/make_lib.go --go-fname solvers/lib.go --pkg solvers
 fi
-
-# Install Go packages
-go mod init github.com/mit-drl/goop

@@ -2,8 +2,6 @@ package goop_test
 
 import (
 	"testing"
-
-	"github.com/mit-drl/goop"
 )
 
 func TestConstantPlus(t *testing.T) {

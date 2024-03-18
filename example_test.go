@@ -3,15 +3,16 @@ package goop_test
 import (
 	"fmt"
 
-	"github.com/mit-drl/goop"
-	"github.com/mit-drl/goop/solvers"
+	"github.com/joeycumines/goop/solvers"
 )
 
 // This example shows how goop can be used to solve a simple MIP:
-//  // maximize    x +   y + 2 z
-//  // subject to  x + 2 y + 3 z <= 4
-//  //             x +   y       >= 1
-//  // x, y, z binary
+//
+//	// maximize    x +   y + 2 z
+//	// subject to  x + 2 y + 3 z <= 4
+//	//             x +   y       >= 1
+//	// x, y, z binary
+//
 // MIP being modelled is the same as in http://www.gurobi.com/documentation/7.5/examples/mip1_cpp_cpp.html
 func ExampleModel_simple() {
 	// Instantiate a new model

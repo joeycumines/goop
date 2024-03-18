@@ -3,7 +3,7 @@ package goop_test
 import (
 	"testing"
 
-	"github.com/mit-drl/goop/solvers"
+	"github.com/joeycumines/goop/solvers"
 )
 
 func TestLPSolve(t *testing.T) {

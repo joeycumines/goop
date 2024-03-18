@@ -4,8 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/mit-drl/goop"
-	"github.com/mit-drl/goop/solvers"
+	"github.com/joeycumines/goop/solvers"
 )
 
 func solveSimpleMIPModel(t *testing.T, solver solvers.Solver) {

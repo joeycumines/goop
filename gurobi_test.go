@@ -1,3 +1,4 @@
+//go:build !travis
 // +build !travis
 
 package goop_test
@@ -5,7 +6,7 @@ package goop_test
 import (
 	"testing"
 
-	"github.com/mit-drl/goop/solvers"
+	"github.com/joeycumines/goop/solvers"
 )
 
 func TestGurobi(t *testing.T) {
