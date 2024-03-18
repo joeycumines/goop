@@ -5,7 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"github.com/joeycumines/goop/solvers"
-	"github.com/sirupsen/logrus"
 	"time"
 )
 
@@ -141,9 +140,6 @@ func (m *Model) Optimize(solver solvers.Solver) (*Solution, error) {
 	}
 
 	if m.obj != nil {
-		logrus.WithField(
-			"num_vars", m.obj.NumVars(),
-		).Info("Number of variables in objective")
 		solver.SetObjective(
 			m.obj.NumVars(),
 			getCoeffsPtr(m.obj),

@@ -1,7 +1,7 @@
 package goop
 
 import (
-	log "github.com/sirupsen/logrus"
+	"fmt"
 )
 
 // Sum returns the sum of the given expressions. It creates a new empty
@@ -48,10 +48,7 @@ func SumCol(vs [][]*Var, col int) Expr {
 // Dot returns the dot product of a vector of variables and slice of floats.
 func Dot(vs []*Var, coeffs []float64) Expr {
 	if len(vs) != len(coeffs) {
-		log.WithFields(log.Fields{
-			"num_vars":   len(vs),
-			"num_coeffs": len(coeffs),
-		}).Panic("Number of vars and coeffs mismatch")
+		panic(fmt.Sprintf(`goop: number of vars and coeffs mismatch: vars=%d coeffs=%d`, len(vs), len(coeffs)))
 	}
 
 	newExpr := NewExpr(0)
