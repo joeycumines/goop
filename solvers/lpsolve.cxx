@@ -4,16 +4,9 @@
 
 using namespace std;
 
-LPSolveSolver::LPSolveSolver() : numVars(0), logLevel(NEUTRAL) {
-    // default sizes (rows, columns), can be added later
-    lp = make_lp(0, 0);
-    if (lp == NULL) {
-        cerr << "Error: Failed to initialize the LP solver." << endl;
-        exit(1);
-    }
-
-    // set default verbosity level
-    set_verbose(lp, logLevel);
+LPSolveSolver::LPSolveSolver()
+{
+    logLevel = NEUTRAL;
 }
 
 LPSolveSolver::~LPSolveSolver()
@@ -24,9 +17,9 @@ LPSolveSolver::~LPSolveSolver()
     }
 }
 
-void LPSolveSolver::showLog(bool shouldShow) {
+void LPSolveSolver::showLog(bool shouldShow)
+{
     logLevel = shouldShow ? FULL : NEUTRAL;
-    set_verbose(lp, logLevel);
 }
 
 void LPSolveSolver::setTimeLimit(double timeLimit)
@@ -34,19 +27,15 @@ void LPSolveSolver::setTimeLimit(double timeLimit)
     set_timeout(lp, timeLimit);
 }
 
-void LPSolveSolver::addVars(int count, double *lb, double *ub, char *types) {
-    // re: "row mode", see https://lpsolve.sourceforge.net/5.5/set_add_rowmode.htm
-    // (there are constraints / limitations, but it's faster)
-    if (get_Ncolumns(lp) == 0) {
-        resize_lp(lp, 0, count);
-//         set_add_rowmode(lp, TRUE);
-    } else {
+void LPSolveSolver::addVars(int count, double *lb, double *ub, char *types)
+{
+    if (lp != NULL) {
         delete_lp(lp);
-        lp = make_lp(0, count);
-        set_verbose(lp, logLevel);
-//         set_add_rowmode(lp, TRUE);
     }
 
+    lp = make_lp(0, count);
+    set_verbose(lp, logLevel);
+    set_add_rowmode(lp, TRUE);
     numVars = count;
 
     for (size_t i = 0; i < count; i++)
@@ -133,7 +122,8 @@ void LPSolveSolver::setObjective(
 MIPSolution LPSolveSolver::optimize()
 {
     MIPSolution sol;
-//     set_add_rowmode(lp, false);
+
+    set_add_rowmode(lp, false);
     int res = solve(lp);
     sol.optimal = res == OPTIMAL;
     sol.gap = get_mip_gap(lp, TRUE);
