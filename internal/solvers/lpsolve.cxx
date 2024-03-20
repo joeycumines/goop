@@ -121,10 +121,15 @@ void LPSolveSolver::setObjective(
 
 MIPSolution LPSolveSolver::optimize()
 {
-    MIPSolution sol;
-
     set_add_rowmode(lp, false);
+
+    if (logLevel == FULL) {
+        write_lp(lp, NULL);
+    }
+
     int res = solve(lp);
+
+    MIPSolution sol;
     sol.optimal = res == OPTIMAL;
     sol.gap = get_mip_gap(lp, TRUE);
     sol.errorCode = res;
@@ -133,7 +138,6 @@ MIPSolution LPSolveSolver::optimize()
     sol.values.resize(numVars);
     REAL vars[numVars];
     get_variables(lp, vars);
-
     for (size_t i = 0; i < numVars; i++)
     {
         sol.values.at(i) = (double) vars[i];
