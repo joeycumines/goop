@@ -3,7 +3,6 @@ package goop
 import (
 	"bytes"
 	"errors"
-	"fmt"
 	"github.com/joeycumines/goop/internal/solvers"
 	"time"
 )
@@ -153,13 +152,11 @@ func (m *Model) Optimize() (*Solution, error) {
 
 	mipSol := solver.Optimize()
 
-	if mipSol.GetErrorCode() != 0 {
-		msg := fmt.Sprintf(
-			"[Code = %d] %s",
-			mipSol.GetErrorCode(),
-			mipSol.GetErrorMessage(),
-		)
-		return nil, errors.New(msg)
+	if code := mipSol.GetErrorCode(); code != 0 {
+		return nil, &OptimizeError{
+			Code:    code,
+			Message: mipSol.GetErrorMessage(),
+		}
 	}
 
 	sol := newSolution(mipSol)
