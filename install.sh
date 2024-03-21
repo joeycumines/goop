@@ -8,8 +8,4 @@ elif [[ $(uname) == 'Darwin' ]]; then
     brew install pcre autoconf
     brew install swig
     brew install lp_solve
-    mkdir -p include
-    for f in /opt/homebrew/opt/lp_solve/include/*; do ln -snf "$f" include/"$(basename "$f")"; done
-    mkdir -p lib
-    for f in /opt/homebrew/opt/lp_solve/lib/*; do ln -snf "$f" lib/"$(basename "$f")"; done
 fi
