@@ -1,19 +1,16 @@
 #!/usr/bin/env bash
 
-set -e
-
-WORK=$(pwd)
+set -xe
 
 if [[ $(uname) == 'Linux' ]]; then
     sudo apt install -y libpcre3 libpcre3-dev autotools-dev byacc \
-        flex cmake build-essential autoconf
-    scripts/install_swig.sh
-    scripts/install_lpsolve.sh
-    mkdir -p .third_party
+        flex cmake build-essential autoconf lp-solve liblpsolve55-dev
 elif [[ $(uname) == 'Darwin' ]]; then
     brew install pcre autoconf
     brew install swig
     brew install lp_solve
-
-    go run scripts/make_lib.go --go-fname internal/solvers/lib.go --pkg solvers
+    mkdir -p include
+    for f in /opt/homebrew/opt/lp_solve/include/*; do ln -snf "$f" include/"$(basename "$f")"; done
+    mkdir -p lib
+    for f in /opt/homebrew/opt/lp_solve/lib/*; do ln -snf "$f" lib/"$(basename "$f")"; done
 fi
