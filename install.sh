@@ -12,8 +12,8 @@ if [[ $(uname) == 'Linux' ]]; then
     mkdir -p .third_party
 elif [[ $(uname) == 'Darwin' ]]; then
     brew install pcre autoconf
-    brew install swig 
-    brew install lp_solve 
+    brew install swig
+    brew install lp_solve
 
     go run scripts/make_lib.go --go-fname internal/solvers/lib.go --pkg solvers
 fi
