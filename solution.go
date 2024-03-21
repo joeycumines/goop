@@ -9,9 +9,10 @@ const (
 )
 
 // Solution stores the solution of an optimization problem and associated
-// metatdata
+// metadata.
 type Solution struct {
-	vals solvers.DoubleVector
+	// variable values
+	vals []float64
 
 	// The objective for the solution
 	Objective float64
@@ -25,9 +26,17 @@ type Solution struct {
 	Gap float64
 }
 
+// newSolution makes a memory-safe copy of the solution data. Note that the
+// input solution MUST be freed by the caller, using the appropriate
+// (swig-generated) delete function.
 func newSolution(mipSol solvers.MIPSolution) *Solution {
+	vec := mipSol.GetValues()
+	vals := make([]float64, int(vec.Size()))
+	for i := range vals {
+		vals[i] = vec.Get(i)
+	}
 	return &Solution{
-		vals:      mipSol.GetValues(),
+		vals:      vals,
 		Objective: mipSol.GetObj(),
 		Optimal:   mipSol.GetOptimal(),
 		Gap:       mipSol.GetGap(),
@@ -36,7 +45,7 @@ func newSolution(mipSol solvers.MIPSolution) *Solution {
 
 // Value returns the value assigned to the variable in the solution
 func (s *Solution) Value(v *Var) float64 {
-	return s.vals.Get(int(v.ID()))
+	return s.vals[int(v.ID())]
 }
 
 // IsOne returns true if the value assigned to the variable is an integer,

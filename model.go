@@ -151,6 +151,7 @@ func (m *Model) Optimize() (*Solution, error) {
 	}
 
 	mipSol := solver.Optimize()
+	defer solvers.DeleteMIPSolution(mipSol)
 
 	if code := mipSol.GetErrorCode(); code != 0 {
 		return nil, &OptimizeError{
