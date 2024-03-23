@@ -5,14 +5,11 @@
 
 using namespace std;
 
-LPSolveSolver::LPSolveSolver()
-{
-    logLevel = NEUTRAL;
-}
+LPSolveSolver::LPSolveSolver() : lp(nullptr), numVars(0), logLevel(NEUTRAL) {}
 
 LPSolveSolver::~LPSolveSolver()
 {
-    if (lp != NULL)
+    if (lp != nullptr)
     {
         delete_lp(lp);
     }
@@ -30,7 +27,7 @@ void LPSolveSolver::setTimeLimit(double timeLimit)
 
 void LPSolveSolver::addVars(int count, double *lb, double *ub, char *types)
 {
-    if (lp != NULL) {
+    if (lp != nullptr) {
         delete_lp(lp);
     }
 
@@ -130,7 +127,7 @@ MIPSolution LPSolveSolver::optimize()
     set_add_rowmode(lp, false);
 
     if (logLevel == FULL) {
-        write_lp(lp, NULL);
+        write_lp(lp, nullptr);
     }
 
     int res = solve(lp);
