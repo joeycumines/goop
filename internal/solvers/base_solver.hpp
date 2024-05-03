@@ -27,6 +27,7 @@ class Solver
                 double constant, int sense) = 0;
         virtual void showLog(bool shouldShow) = 0;
         virtual void setTimeLimit(double timeLimit) = 0;
+        virtual void setScaling(int scaleMode) = 0;
         virtual MIPSolution optimize() = 0;
 };
 

@@ -25,6 +25,11 @@ void LPSolveSolver::setTimeLimit(double timeLimit)
     set_timeout(lp, timeLimit);
 }
 
+void LPSolveSolver::setScaling(int scaleMode)
+{
+    set_scaling(lp, scaleMode);
+}
+
 void LPSolveSolver::addVars(int count, double *lb, double *ub, char *types)
 {
     if (lp != nullptr) {

@@ -17,6 +17,7 @@ type Model struct {
 	obj       *Objective
 	showLog   bool
 	timeLimit time.Duration
+	scaleMode *ScaleMode
 }
 
 // NewModel returns a new model with some default arguments such as not to show
@@ -120,10 +121,6 @@ func (m *Model) Optimize() (*Solution, error) {
 
 	solver.ShowLog(m.showLog)
 
-	if m.timeLimit > 0 {
-		solver.SetTimeLimit(m.timeLimit.Seconds())
-	}
-
 	solver.AddVars(len(m.vars), &lbs[0], &ubs[0], types.String())
 
 	for _, constr := range m.constrs {
@@ -148,6 +145,14 @@ func (m *Model) Optimize() (*Solution, error) {
 			m.obj.Constant(),
 			int(m.obj.sense),
 		)
+	}
+
+	if m.timeLimit > 0 {
+		solver.SetTimeLimit(m.timeLimit.Seconds())
+	}
+
+	if m.scaleMode != nil {
+		solver.SetScaling(int(*m.scaleMode))
 	}
 
 	mipSol := solver.Optimize()

@@ -20,6 +20,7 @@ public:
             double constant, int sense);
     void showLog(bool shouldShow);
     void setTimeLimit(double timeLimit);
+    void setScaling(int scaleMode);
     MIPSolution optimize();
 private:
     lprec *lp;
